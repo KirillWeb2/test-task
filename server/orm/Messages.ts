@@ -1,4 +1,5 @@
 import { MysqlError, Pool, PoolConfig, createPool } from "mysql";
+import dotenv from "dotenv";
 
 import {
   CreateMessageType,
@@ -8,6 +9,8 @@ import {
   MessagesSortType,
   MessagesSplitPageType,
 } from "../types/message.js";
+
+dotenv.config();
 
 export class Messages {
   pool: Pool;
@@ -104,8 +107,8 @@ export class Messages {
 
 export const MessagesORM = new Messages({
   connectionLimit: 5,
-  host: "localhost",
-  user: "root",
-  password: "",
-  database: "test-task",
+  host: process.env.DB_HOST,
+  user: process.env.DB_USER,
+  password: process.env.DB_PASSWORD,
+  database: process.env.DB_NAME,
 });

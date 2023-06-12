@@ -41,9 +41,17 @@ export const Form: FC<FormProps> = ({ toggleAddMessageForm, refetch }) => {
           className="input"
           type="text"
           placeholder="Имя пользователя"
-          {...register("username", { required: true })}
+          {...register("username", {
+            required: true,
+            pattern: /^[a-zA-Z0-9]+$/,
+          })}
         />
-        {errors.username && <span>Username field is required</span>}
+        {errors.username && errors.username.type === "required" && (
+          <span>Поле обязательно</span>
+        )}
+        {errors.username && errors.username.type === "pattern" && (
+          <span>Допускаются только цифры и буквы латинского алфавита</span>
+        )}
       </div>
       <div className="form__item">
         <input
@@ -52,11 +60,13 @@ export const Form: FC<FormProps> = ({ toggleAddMessageForm, refetch }) => {
           placeholder="Почта"
           {...register("email", { required: true })}
         />
-        {errors.email && <span>Email field is required</span>}
+        {errors.email && errors.email.type === "required" && (
+          <span>Поле обязательно</span>
+        )}
       </div>
       <div className="form__item">
         <input
-          type="text"
+          type="url"
           className="input"
           placeholder="Home page"
           {...register("homepage", {})}
@@ -66,9 +76,14 @@ export const Form: FC<FormProps> = ({ toggleAddMessageForm, refetch }) => {
         <textarea
           className="textarea"
           placeholder="Сообщение"
-          {...register("text", { required: true })}
+          {...register("text", { required: true, pattern: /^[^<>\n]+$/gm })}
         ></textarea>
-        {errors.text && <span>Text field is required</span>}
+        {errors.text && errors.text.type === "required" && (
+          <span>Поле обязательно</span>
+        )}
+        {errors.text && errors.text.type === "pattern" && (
+          <span>Не используйте html теги</span>
+        )}
       </div>
       <div className="form__btns">
         <button className="btn" disabled={isSubmitting} type="submit">

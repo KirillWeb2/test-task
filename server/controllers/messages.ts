@@ -33,7 +33,7 @@ export const create = async (req: Request, res: Response) => {
     const body = req.body as CreateMessageType;
 
     body.date = new Date();
-    console.log(body.date)
+  
     body.user_ip = req.ip || "0.0.0.0";
     body.user_browser = req.headers["user-agent"] || "";
 

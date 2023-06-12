@@ -249,7 +249,8 @@ select {
 }
 
 input[type="text"],
-input[type="email"] {
+input[type="email"],
+input[type="url"] {
   padding: 5px;
   width: 100%;
   max-width: 400px;
@@ -259,8 +260,9 @@ input[type="email"] {
   outline: none;
 }
 
-input[type="text"],
-input[type="email"]:focus {
+input[type="text"]:focus,
+input[type="email"]:focus,
+input[type="url"]:focus {
   border-color: #333;
 }
 
