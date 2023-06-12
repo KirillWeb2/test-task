@@ -1,13 +1,15 @@
 import { FC, useCallback } from "react";
 
 import { useCustomSearchParams } from "../hooks/useCustomSearchParams";
-import { useMessages } from "../hooks/useMessages";
+import { SettingsType } from "../types/settings";
 
-export interface PaginationProps {}
+export interface PaginationProps {
+  settings: SettingsType;
+  setSettings: (settings: SettingsType) => void;
+}
 
-export const Pagination: FC<PaginationProps> = () => {
+export const Pagination: FC<PaginationProps> = ({ setSettings, settings }) => {
   let [search, setSearch] = useCustomSearchParams();
-  const { setSettings, settings } = useMessages({ search, setSearch });
 
   const handleNextPage = useCallback(() => {
     setSettings({ ...settings, page: +settings.page + 1 });

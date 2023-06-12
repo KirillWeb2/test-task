@@ -2,13 +2,15 @@ import { FC, useCallback, ChangeEvent } from "react";
 
 import { SORT_FIELD, SORT_TYPE } from "../types/message";
 import { useCustomSearchParams } from "../hooks/useCustomSearchParams";
-import { useMessages } from "../hooks/useMessages";
+import { SettingsType } from "../types/settings";
 
-interface SortedProps {}
+interface SortedProps {
+  settings: SettingsType;
+  setSettings: (settings: SettingsType) => void;
+}
 
-export const Sorted: FC<SortedProps> = () => {
+export const Sorted: FC<SortedProps> = ({ setSettings, settings }) => {
   const [search, setSearch] = useCustomSearchParams();
-  const { setSettings, settings } = useMessages({ search, setSearch });
 
   const handleChangeField = useCallback(
     (e: ChangeEvent<HTMLSelectElement>) => {
